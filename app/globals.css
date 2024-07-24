@@ -31,3 +31,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.head_text {
+  @apply mt-5 text-3xl font-extrabold leading-[1.15];
+}
