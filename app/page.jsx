@@ -1,39 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [text, setText] = useState("");
+  const [manuscripts, setManuscripts] = useState([]);
 
+  const fetchData = async () => {
+    const response = await fetch("/api");
+    const manuscriptsData = await response.json();
+    setManuscripts(manuscriptsData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   const handleChange = (event) => {
     setText(event.target.value);
   };
 
-  const handleSubmit = async event => {
-    event.preventDefault()
-    console.log("text:", text);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     try {
-      const response = await fetch('/api/new', {
-        method: 'POST',
+      const response = await fetch("/api/new", {
+        method: "POST",
         body: JSON.stringify({
-          text
-        })
-      })
+          text,
+          createdAt: new Date().toISOString(),
+        }),
+      });
 
       if (response.ok) {
         //? Manuscript added
-        setText("")
+        setText("");
+        fetchData();
       }
     } catch (error) {
       console.log(error);
-
     }
-  }
-
+  };
 
   return (
-    <main className="w-full flex flex-col">
+    <main className="w-full flex flex-col p-2">
       <header className="head_text  text-center">Manuscripts</header>
       <p className="mt-5 px-3 text-gray-400  text-center sm:text-xl">
         Share your hidden wisdom; it may hold the greatest value. Expressing
@@ -56,6 +65,20 @@ export default function Home() {
           className="bg-slate-500 p-2 rounded-lg w-20 "
         />
       </form>
+
+      <div className="flex flex-col gap-3 p-3">
+        {manuscripts.map((manuscript) => {
+          return (
+            <div
+              key={manuscript._id}
+              className="text-white bg-slate-700 p-2 rounded"
+            >
+              {manuscript.text}
+            </div>
+          );
+        })}
+      </div>
     </main>
   );
 }
+
