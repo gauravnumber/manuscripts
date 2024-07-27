@@ -22,7 +22,8 @@ export default function Home() {
       })
 
       if (response.ok) {
-        console.log('manuscript added')
+        //? Manuscript added
+        setText("")
       }
     } catch (error) {
       console.log(error);
@@ -47,6 +48,7 @@ export default function Home() {
           onChange={handleChange}
           className="text-slate-300  h-40 p-4 border bg-slate-800 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           placeholder="Type your text here..."
+          autoFocus
         />
         <input
           type="submit"
