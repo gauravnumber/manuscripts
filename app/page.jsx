@@ -71,7 +71,7 @@ export default function Home() {
           return (
             <div
               key={manuscript._id}
-              className="text-white bg-slate-700 p-2 rounded"
+              className="text-white bg-slate-700 p-2 rounded whitespace-pre-line"
             >
               {manuscript.text}
             </div>
