@@ -29,6 +29,7 @@ export default function Home() {
           text,
           createdAt: new Date().toISOString(),
         }),
+        cache: 'no-store'
       });
 
       if (response.ok) {
