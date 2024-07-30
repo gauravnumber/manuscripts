@@ -7,7 +7,7 @@ export default function Home() {
   const [manuscripts, setManuscripts] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch("/api");
+    const response = await fetch("/api", { cache: 'no-store' });
     const manuscriptsData = await response.json();
     setManuscripts(manuscriptsData);
   };
@@ -29,7 +29,7 @@ export default function Home() {
           text,
           createdAt: new Date().toISOString(),
         }),
-        cache: 'no-store'
+        // cache: 'no-store'
       });
 
       if (response.ok) {
