@@ -15,7 +15,6 @@ export default function Home() {
     const response = await fetch(`/api`, { cache: 'no-store' });
     const manuscriptsData = await response.json();
     setManuscripts(manuscriptsData);
-    console.log(manuscripts)
     // router.refresh()
   };
 
@@ -43,6 +42,7 @@ export default function Home() {
         //? Manuscript added
         setText("");
         await fetchData();
+        console.log(manuscripts)
       }
     } catch (error) {
       console.log(error);
