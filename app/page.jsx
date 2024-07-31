@@ -35,7 +35,7 @@ export default function Home() {
       if (response.ok) {
         //? Manuscript added
         setText("");
-        fetchData();
+        await fetchData();
       }
     } catch (error) {
       console.log(error);
