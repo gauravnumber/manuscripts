@@ -6,7 +6,7 @@ export const POST = async (request) => {
 
     try {
         const result = await collection.insertOne(text);
-        console.log('Document inserted:', result.insertedId);
+        // console.log('Document inserted:', result.insertedId);
         return new Response(`Document inserted`, {
             status: 201, headers: {
                 'Cache-Control': 'no-store'
