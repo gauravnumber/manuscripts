@@ -8,11 +8,11 @@ export default function Home() {
   const [text, setText] = useState("");
   const [manuscripts, setManuscripts] = useState([]);
   // const router = useRouter()
-  // const timestamp = new Date().getTime()
+  const timestamp = new Date().getTime()
 
   const fetchData = async () => {
-    // const response = await fetch(`/api?${timestamp}`, { cache: 'no-store' });
-    const response = await fetch(`/api`, { cache: 'no-store' });
+    const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
+    // const response = await fetch(`/api`, { cache: 'no-store' });
     const manuscriptsData = await response.json();
     setManuscripts(manuscriptsData);
     // router.refresh()
