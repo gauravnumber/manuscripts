@@ -1,22 +1,20 @@
 "use client";
 
-import { Calistoga } from "next/font/google";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [text, setText] = useState("");
   const [manuscripts, setManuscripts] = useState([]);
-  // const router = useRouter()
-  const timestamp = new Date().getTime()
+  const router = useRouter()
+  // const timestamp = new Date().getTime()
 
   const fetchData = async () => {
-    const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
-    // const response = await fetch(`/api`, { cache: 'no-store' });
+    // const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
+    const response = await fetch(`/api`, { cache: 'no-store' });
     const manuscriptsData = await response.json();
     return manuscriptsData
     // setManuscripts(manuscriptsData);
-    // router.refresh()
   };
 
   useEffect(() => {
@@ -44,6 +42,7 @@ export default function Home() {
         setText("");
         // await fetchData();
         fetchData().then(manuscript => setManuscripts(manuscript));
+        router.refresh()
 
         console.log(manuscripts)
       }
