@@ -1,24 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const fetchData = async () => {
+  // const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
+  const response = await fetch(`/api`, { cache: "no-store" });
+  const manuscriptsData = await response.json();
+  console.log("/", manuscriptsData);
+  return manuscriptsData;
+  // setManuscripts(manuscriptsData);
+};
 
 export default function Home() {
   const [text, setText] = useState("");
   const [manuscripts, setManuscripts] = useState([]);
-  const router = useRouter()
+  // const router = useRouter()
   // const timestamp = new Date().getTime()
 
-  const fetchData = async () => {
-    // const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
-    const response = await fetch(`/api`, { cache: 'no-store' });
-    const manuscriptsData = await response.json();
-    return manuscriptsData
-    // setManuscripts(manuscriptsData);
-  };
-
   useEffect(() => {
-    fetchData().then(manuscript => setManuscripts(manuscript));
+    fetchData().then((manuscript) => setManuscripts(manuscript));
   }, []);
   const handleChange = (event) => {
     setText(event.target.value);
@@ -34,17 +35,17 @@ export default function Home() {
           text,
           createdAt: new Date().toISOString(),
         }),
-        cache: 'no-store'
+        cache: "no-store",
       });
 
       if (response.ok) {
         //? Manuscript added
         setText("");
         // await fetchData();
-        fetchData().then(manuscript => setManuscripts(manuscript));
-        router.refresh()
+        fetchData().then((manuscript) => setManuscripts(manuscript));
+        // router.refresh()
 
-        console.log(manuscripts)
+        console.log("new", manuscripts);
       }
     } catch (error) {
       console.log(error);
@@ -91,4 +92,3 @@ export default function Home() {
     </main>
   );
 }
-
