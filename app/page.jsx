@@ -8,7 +8,7 @@ const fetchData = async () => {
   const response = await fetch(`/api`, { cache: "no-store" });
   const manuscriptsData = await response.json();
   console.log("/", manuscriptsData);
-  return manuscriptsData;
+  return manuscriptsData.manuscripts;
   // setManuscripts(manuscriptsData);
 };
 
