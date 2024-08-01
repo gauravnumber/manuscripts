@@ -14,12 +14,13 @@ export default function Home() {
     const response = await fetch(`/api?q=${timestamp}`, { cache: 'no-store' });
     // const response = await fetch(`/api`, { cache: 'no-store' });
     const manuscriptsData = await response.json();
-    setManuscripts(manuscriptsData);
+    return manuscriptsData
+    // setManuscripts(manuscriptsData);
     // router.refresh()
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData().then(manuscript => setManuscripts(manuscript));
   }, []);
   const handleChange = (event) => {
     setText(event.target.value);
@@ -41,7 +42,9 @@ export default function Home() {
       if (response.ok) {
         //? Manuscript added
         setText("");
-        await fetchData();
+        // await fetchData();
+        fetchData().then(manuscript => setManuscripts(manuscript));
+
         console.log(manuscripts)
       }
     } catch (error) {
