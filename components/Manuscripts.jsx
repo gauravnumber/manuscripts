@@ -1,7 +1,10 @@
+// "use server"
+import { getAllManuscripts } from "@lib/actions";
 import { fetchManuscripts } from "@lib/fetchManuscripts";
 
 const Manuscripts = async () => {
-  const manuscripts = await fetchManuscripts()
+  // const manuscripts = await fetchManuscripts()
+  const manuscripts = await getAllManuscripts()
 
   return (
     <>

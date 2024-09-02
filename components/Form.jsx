@@ -1,17 +1,13 @@
-"use client"
 import { addManuscript } from "@lib/actions";
 
 const Form = () => {
-  const formAction = async (formData) => {
-    const text = formData.get("manuscript")
-    await addManuscript(text)
-  }
+  // const formAction = async (formData) => {
+  //   const text = formData.get("manuscript");
+  //   await addManuscript(text);
+  // };
 
   return (
-    <form
-      className="w-full p-3 flex flex-col gap-2"
-      action={formAction}
-    >
+    <form className="w-full p-3 flex flex-col gap-2" action={addManuscript}>
       <textarea
         className="text-slate-300  h-40 p-4 border bg-slate-800 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
         placeholder="Type your text here..."
